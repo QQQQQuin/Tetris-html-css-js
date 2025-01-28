@@ -1,0 +1,20 @@
+body{
+    background-color: black;
+    color: white;
+}
+#board {
+    white-space: pre; /* Preserve spaces */
+    font-size: 16px; /* Adjust font size */
+    line-height: 1.5; /* Adjust line spacing */
+    text-align: left;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gameBtn{
+    margin: 10px;
+    font-family: "monospace";
+    font-size: 30px;
+}
