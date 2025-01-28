@@ -245,7 +245,27 @@ right.addEventListener("click",() => {
 function checkCanRClockwise(){
     let type = a[fallingPiece[0][0]][fallingPiece[0][1]];
     let rotationState = fallingPiece[4];
-    
+
+    if(type == 1){
+        if(rotationState==0){
+            if(fallingPiece[0][0]-2 > 0){
+                if(a[fallingPiece[0][0] - 2][fallingPiece[0][1] + 2]==0 && a[fallingPiece[0][0] - 1][fallingPiece[0][1] + 2]==0 && a[fallingPiece[0][0] + 1][fallingPiece[0][1] + 2]==0){
+                    a[fallingPiece[0][0] - 2][fallingPiece[0][1] + 2]=1;
+                    a[fallingPiece[0][0] - 1][fallingPiece[0][1] + 2]=1;
+                    a[fallingPiece[0][0] + 1][fallingPiece[0][1] + 2]=1;
+
+                    fallingPiece[0][0] -= 2;
+                    fallingPiece[0][1] += 2;
+
+
+                }
+            }
+        }
+        else if(rotationState==1){
+            
+        }
+    }
+
 }
 
 
