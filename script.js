@@ -274,8 +274,7 @@ function checkCanRClockwise(){
             }
         }
         else if(rotationState==1){
-            
-if(fallingPiece[0][1] - 2 >= 0 && fallingPiece[0][1] + 1 < 10){
+            if(fallingPiece[0][1] - 2 >= 0 && fallingPiece[0][1] + 1 < 10){
                 if(a[fallingPiece[0][0] + 2][fallingPiece[0][1] - 2]==0 && a[fallingPiece[0][0] + 2][fallingPiece[0][1] - 1]==0 && a[fallingPiece[0][0] + 2][fallingPiece[0][1] + 1]==0){
                     fallingPiece[4] = 0;
                     a[fallingPiece[0][0] + 2][fallingPiece[0][1] - 2]=1;
