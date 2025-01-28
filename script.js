@@ -27,7 +27,7 @@ function deepCopyArray(arr) {
 
 function dropRandom(){
     let i = Math.floor(Math.random() * 7)+1;
-    i = 5;
+    i = 7;
     console.log(i);
     // I, J, L, O, S, T, Z
     if(i==1){
@@ -547,6 +547,136 @@ if(fallingPiece[0][1] - 2 >= 0 && fallingPiece[0][1] + 1 < 10){
 
                     fallingPiece[3][0] += 1;
                     fallingPiece[3][1] -= 0;
+                }
+            }
+        }
+    }
+    else if(type == 6){
+        if(rotationState==0){
+            if(fallingPiece[0][1]+2 <= 21){
+                if(a[fallingPiece[0][0] + 2][fallingPiece[0][1]]==0){
+                    fallingPiece[4] = 1;
+                    a[fallingPiece[0][0] + 2][fallingPiece[0][1]]=6;
+                    
+                    a[fallingPiece[1][0]][fallingPiece[1][1]]=0;
+
+                    fallingPiece[0][0] += 1;
+                    fallingPiece[0][1] += 1;
+                    
+
+                    fallingPiece[1][0] -= 1;
+                    fallingPiece[1][1] += 1;
+
+                    fallingPiece[3][0] += 1;
+                    fallingPiece[3][1] -= 1;
+                }
+            }
+        }
+        else if(rotationState==1){
+            if(fallingPiece[0][1] - 2 >= 0){
+                if(a[fallingPiece[0][0]][fallingPiece[0][1] - 2]==0){
+                    fallingPiece[4] = 2;
+                    a[fallingPiece[0][0]][fallingPiece[0][1] - 2]=6;
+                    
+                    a[fallingPiece[1][0]][fallingPiece[1][1]]=0;
+
+                    fallingPiece[0][0] += 1;
+                    fallingPiece[0][1] -= 1;
+
+                    fallingPiece[1][0] += 1;
+                    fallingPiece[1][1] += 1;
+
+                    fallingPiece[3][0] -= 1;
+                    fallingPiece[3][1] -= 1;
+                }
+            }
+        }
+        else if(rotationState==2){
+            if(fallingPiece[0][0] - 2 >= 0){
+                if(a[fallingPiece[0][0] - 2][fallingPiece[0][1]]==0){
+                    fallingPiece[4] = 3;
+                    a[fallingPiece[0][0] - 2][fallingPiece[0][1]]=6;
+                    
+                    a[fallingPiece[1][0]][fallingPiece[1][1]]=0;
+
+                    fallingPiece[0][0] -= 1;
+                    fallingPiece[0][1] -= 1;
+
+                    fallingPiece[1][0] += 1;
+                    fallingPiece[1][1] -= 1;
+
+                    fallingPiece[3][0] -= 1;
+                    fallingPiece[3][1] += 1;
+                }
+            }
+        }
+        else if(rotationState==3){
+            if(fallingPiece[0][1] + 2 <= 9){
+                if(a[fallingPiece[0][0]][fallingPiece[0][1] + 2]==0){
+                    fallingPiece[4] = 0;
+                    a[fallingPiece[0][0]][fallingPiece[0][1] + 2]=6;
+                    
+                    a[fallingPiece[1][0]][fallingPiece[1][1]]=0;
+
+                    fallingPiece[0][0] -= 1;
+                    fallingPiece[0][1] += 1;
+
+                    fallingPiece[1][0] -= 1;
+                    fallingPiece[1][1] -= 1;
+
+                    fallingPiece[3][0] += 1;
+                    fallingPiece[3][1] += 1;
+                }
+            }
+        }
+    }
+    else if(type == 7){
+        if(rotationState==0){
+            if(fallingPiece[0][0] - 1 >=0){
+                if(a[fallingPiece[0][0] - 1][fallingPiece[0][1] + 2]==0 && a[fallingPiece[0][0]][fallingPiece[0][1] + 2]==0){
+                    fallingPiece[4] = 1;
+                    a[fallingPiece[0][0] - 1][fallingPiece[0][1] + 2]=7;
+                    a[fallingPiece[0][0]][fallingPiece[0][1] + 2]=7;
+                    
+                    a[fallingPiece[0][0]][fallingPiece[0][1]]=0;
+                    a[fallingPiece[3][0]][fallingPiece[3][1]]=0;
+
+                    fallingPiece[0][0] += -1;
+                    fallingPiece[0][1] += 2;
+                    
+
+                    fallingPiece[1][0] += 0;
+                    fallingPiece[1][1] += 1;
+                    
+                    fallingPiece[2][0] -= 1;
+                    fallingPiece[2][1] += 0;
+
+                    fallingPiece[3][0] -= 0;
+                    fallingPiece[3][1] -= 1;
+                }
+            }
+        }
+        else if(rotationState==1){
+            if(fallingPiece[0][1] - 2 >= 0){
+                if(a[fallingPiece[0][0] + 1][fallingPiece[0][1] - 2]==0 && a[fallingPiece[0][0] + 2][fallingPiece[0][1]]==0){
+                    fallingPiece[4] = 0;
+                    a[fallingPiece[0][0] + 1][fallingPiece[0][1] - 2]=7;
+                    a[fallingPiece[0][0] + 2][fallingPiece[0][1]]=7;
+                    
+                    a[fallingPiece[0][0]][fallingPiece[0][1]]=0;
+                    a[fallingPiece[1][0]][fallingPiece[1][1]]=0;
+
+                    fallingPiece[0][0] += 1;
+                    fallingPiece[0][1] -= 2;
+
+                    fallingPiece[1][0] -= 0;
+                    fallingPiece[1][1] += -1;
+                    
+                    fallingPiece[2][0] += 1;
+                    fallingPiece[2][1] -= 0;
+
+                    fallingPiece[3][0] += 0;
+                    fallingPiece[3][1] += 1;
                 }
             }
         }
