@@ -35,9 +35,9 @@ function dropRandom(){
         a[0][5] = 1;
         a[0][6] = 1;
 
-        fallingPiece = [[0, 3], [0, 4], [0, 5], [0, 6]]
+        fallingPiece = [[0, 3], [0, 4], [0, 5], [0, 6], 0]
 
-        // (0,3) (0,4) (0,5) (0,6) to fallingPiece?
+        // (0,3) (0,4) (0,5) (0,6) to fallingPiece? fallingPiece[4] for rotation
     }
     else if(i==2){
         a[0][3] = 2;
@@ -45,7 +45,7 @@ function dropRandom(){
         a[1][4] = 2;
         a[1][5] = 2;
 
-        fallingPiece = [[0,3],[1,3],[1,4],[1,5]];
+        fallingPiece = [[0,3],[1,3],[1,4],[1,5], 0];
     }
     else if(i==3){
         a[0][5] = 3;
@@ -53,7 +53,7 @@ function dropRandom(){
         a[1][4] = 3;
         a[1][5] = 3;
 
-        fallingPiece = [[0,5],[1,4],[1,5],[1,3]];
+        fallingPiece = [[0,5],[1,4],[1,5],[1,3], 0];
     }
     else if(i==4){
         a[0][4] = 4;
@@ -61,7 +61,7 @@ function dropRandom(){
         a[1][4] = 4;
         a[1][5] = 4;
 
-        fallingPiece = [[0,4],[0,5],[1,4],[1,5]];
+        fallingPiece = [[0,4],[0,5],[1,4],[1,5], 0];
     }
     else if(i==5){
         a[0][4] = 5;
@@ -69,7 +69,7 @@ function dropRandom(){
         a[1][3] = 5;
         a[1][4] = 5;
 
-        fallingPiece = [[0,4],[0,5],[1,3],[1,4]];
+        fallingPiece = [[0,4],[0,5],[1,3],[1,4], 0];
     }
     else if(i==6){
         a[0][4] = 6;
@@ -77,7 +77,7 @@ function dropRandom(){
         a[1][4] = 6;
         a[1][5] = 6;
 
-        fallingPiece = [[0,4],[1,3],[1,4],[1,5]];
+        fallingPiece = [[0,4],[1,3],[1,4],[1,5], 0];
     }
     else if(i==7){
         a[0][3] = 7;
@@ -85,7 +85,7 @@ function dropRandom(){
         a[1][4] = 7;
         a[1][5] = 7;
 
-        fallingPiece = [[0,3],[0,4],[1,4],[1,5]];
+        fallingPiece = [[0,3],[0,4],[1,4],[1,5], 0];
     }
 }
 
@@ -164,13 +164,13 @@ function fall(){
     if(checkCanFall()){
         let type = a[fallingPiece[0][0]][fallingPiece[0][1]];
         // Clear current position in `a`
-        for (let i = 0; i < fallingPiece.length; i++) {
+        for (let i = 0; i < 4; i++) {
             let [row, col] = fallingPiece[i];
             a[row][col] = 0; // Clear the old position
         }
 
         // Move `fallingPiece` down and update `a`
-        for (let i = 0; i < fallingPiece.length; i++) {
+        for (let i = 0; i < 4; i++) {
             fallingPiece[i][0] += 1; // Move down
             let [newRow, newCol] = fallingPiece[i];
             a[newRow][newCol] = type; // Update new position in `a`
@@ -208,13 +208,13 @@ left.addEventListener("click",() => {
     if(checkCanGoLeft()){
         let type = a[fallingPiece[0][0]][fallingPiece[0][1]];
         // Clear current position in `a`
-        for (let i = 0; i < fallingPiece.length; i++) {
+        for (let i = 0; i < 4; i++) {
             let [row, col] = fallingPiece[i];
             a[row][col] = 0; // Clear the old position
         }
 
         // Move `fallingPiece` down and update `a`
-        for (let i = 0; i < fallingPiece.length; i++) {
+        for (let i = 0; i < 4; i++) {
             fallingPiece[i][1] -= 1; // Move left
             let [newRow, newCol] = fallingPiece[i];
             a[newRow][newCol] = type; // Update new position in `a`
@@ -226,13 +226,13 @@ right.addEventListener("click",() => {
     if(checkCanGoRight()){
         let type = a[fallingPiece[0][0]][fallingPiece[0][1]];
         // Clear current position in `a`
-        for (let i = 0; i < fallingPiece.length; i++) {
+        for (let i = 0; i < 4; i++) {
             let [row, col] = fallingPiece[i];
             a[row][col] = 0; // Clear the old position
         }
 
         // Move `fallingPiece` down and update `a`
-        for (let i = 0; i < fallingPiece.length; i++) {
+        for (let i = 0; i < 4; i++) {
             fallingPiece[i][1] += 1; // Move right
             let [newRow, newCol] = fallingPiece[i];
             a[newRow][newCol] = type; // Update new position in `a`
@@ -241,3 +241,30 @@ right.addEventListener("click",() => {
     display();
 })
 
+
+function checkCanRClockwise(){
+    let type = a[fallingPiece[0][0]][fallingPiece[0][1]];
+    let rotationState = fallingPiece[4];
+    
+}
+
+
+
+r_clockwise.addEventListener("click",() => {
+    if(checkCanRClockwise()){
+        let type = a[fallingPiece[0][0]][fallingPiece[0][1]];
+        // Clear current position in `a`
+        for (let i = 0; i < 4; i++) {
+            let [row, col] = fallingPiece[i];
+            a[row][col] = 0; // Clear the old position
+        }
+
+        // Move `fallingPiece` down and update `a`
+        for (let i = 0; i < 4; i++) {
+            fallingPiece[i][1] += 1; // Move right
+            let [newRow, newCol] = fallingPiece[i];
+            a[newRow][newCol] = type; // Update new position in `a`
+        }
+    }
+    display();
+})
