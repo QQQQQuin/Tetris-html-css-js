@@ -4,6 +4,7 @@ const left = document.getElementById("left");
 const right = document.getElementById("right");
 const r_counter = document.getElementById("r_counter");
 const r_clockwise = document.getElementById("r_clockwise");
+const down = document.getElementById("down");
 
 const a = new Array(21).fill().map(() => new Array(10).fill(0));
 a.push(new Array(10).fill(9));
@@ -27,7 +28,7 @@ function deepCopyArray(arr) {
 
 function dropRandom(){
     let i = Math.floor(Math.random() * 7)+1;
-    i = 7;
+    // i = 1;
     console.log(i);
     // I, J, L, O, S, T, Z
     if(i==1){
@@ -181,10 +182,12 @@ function fall(){
 
 function update(){
     if(!checkCanFall()){
+        clearRow();
         dropRandom();
     }
     fall();
     display();
+    // clearRow();
     if(gameRunning == true){
         setTimeout(update, interval);
     }
@@ -264,8 +267,7 @@ function checkCanRClockwise(){
                     fallingPiece[0][0] -= 2;
                     fallingPiece[0][1] += 2;
                     
-
-                   fallingPiece[1][0] -= 1;
+                   fallingPiece[1][0] -= 1;
                     fallingPiece[1][1] += 1;
 
                     fallingPiece[3][0] += 1;
@@ -274,8 +276,7 @@ function checkCanRClockwise(){
             }
         }
         else if(rotationState==1){
-            
-if(fallingPiece[0][1] - 2 >= 0 && fallingPiece[0][1] + 1 < 10){
+            if(fallingPiece[0][1] - 2 >= 0 && fallingPiece[0][1] + 1 < 10){
                 if(a[fallingPiece[0][0] + 2][fallingPiece[0][1] - 2]==0 && a[fallingPiece[0][0] + 2][fallingPiece[0][1] - 1]==0 && a[fallingPiece[0][0] + 2][fallingPiece[0][1] + 1]==0){
                     fallingPiece[4] = 0;
                     a[fallingPiece[0][0] + 2][fallingPiece[0][1] - 2]=1;
@@ -290,8 +291,7 @@ if(fallingPiece[0][1] - 2 >= 0 && fallingPiece[0][1] + 1 < 10){
                     fallingPiece[0][0] += 2;
                     fallingPiece[0][1] -= 2;
                     
-
-                   fallingPiece[1][0] += 1;
+                   fallingPiece[1][0] += 1;
                     fallingPiece[1][1] -= 1;
 
                     fallingPiece[3][0] -= 1;
@@ -682,10 +682,57 @@ if(fallingPiece[0][1] - 2 >= 0 && fallingPiece[0][1] + 1 < 10){
         }
     }
 }
+function checkRow(arr,i){
+    if(arr[i][0]==9){
+        return false;
+    }
+    for (let j=0;j<10;j++){
+        if(arr[i][j]==0){
+            return false;
+        }
+        // if(arrayIncludes(fallingPiece,[i,j])){
+        //     return false;
+        // }
+    }
+    return true;
+}
 
-
+function clearRow(){
+    for (let i=0;i<21;i++){
+        if(checkRow(a,i)){
+            for (let j=0;j<10;j++){
+                a[i][j]=0;
+            }
+            for (let x=i;x>0;x--){
+                for(let y=0;y<10;y++){
+                    a[x][y]=a[x-1][y];
+                }
+            }
+        }
+    }
+}
 
 r_clockwise.addEventListener("click",() => {
     checkCanRClockwise();
+    display();
+})
+
+down.addEventListener("click",() => {
+    if(checkCanFall()){
+        let type = a[fallingPiece[0][0]][fallingPiece[0][1]];
+        // Clear current position in `a`
+        for (let i = 0; i < 4; i++) {
+            let [row, col] = fallingPiece[i];
+            a[row][col] = 0; // Clear the old position
+        }
+
+        // Move `fallingPiece` down and update `a`
+        for (let i = 0; i < 4; i++) {
+            fallingPiece[i][0] += 1; // Move down
+            let [newRow, newCol] = fallingPiece[i];
+            a[newRow][newCol] = type; // Update new position in `a`
+        }
+    }
+    // clearRow();
     display();
 })
