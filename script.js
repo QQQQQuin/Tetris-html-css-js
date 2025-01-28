@@ -6,7 +6,7 @@ const r_counter = document.getElementById("r_counter");
 const r_clockwise = document.getElementById("r_clockwise");
 const down = document.getElementById("down");
 
-const a = new Array(21).fill().map(() => new Array(10).fill(0));
+let a = new Array(21).fill().map(() => new Array(10).fill(0));
 a.push(new Array(10).fill(9));
 // I, J, L, O, S, T, Z
 // const tetrominoes = 
@@ -95,14 +95,17 @@ function display(){
     let s = ``;
     let i = 0;
     a.forEach(row => {
-        row.forEach(element => {
-            if (element == 0) {
-                s += `   `; // 3 spaces for each 0
-            } else {
-                s += `[${element}]`;
-            }
-        });
-        s += ` ${i++}<br>`; // Add <br> for line break
+        if(i<21){
+            row.forEach(element => {
+                if (element == 0) {
+                    s += `   `; // 3 spaces for each 0
+                } else {
+                    s += `[${element}]`;
+                }
+            });
+            s+=` ${i}<br>`; // Add <br> for line break
+            i++;
+        }
     });
     s += `[-][-][-][-][-][-][-][-][-][-]<br>`;
     board.innerHTML = s;
@@ -181,14 +184,20 @@ function fall(){
 }
 
 function update(){
-    if(!checkCanFall()){
-        clearRow();
-        dropRandom();
-    }
-    fall();
-    display();
-    // clearRow();
+    // console.log("update");
     if(gameRunning == true){
+        if(!checkCanFall()){
+            clearRow();
+            if(checkGameOver()){
+                gameRunning = false;
+                return;
+            }
+            else{
+                dropRandom();
+            }
+        }
+        fall();
+        display();
         setTimeout(update, interval);
     }
 }
@@ -736,3 +745,24 @@ down.addEventListener("click",() => {
     // clearRow();
     display();
 })
+
+function checkGameOver(){
+    for(let i=0;i<10;i++){
+        if(a[0][i]!=0){
+            console.log("over");
+            return true;
+        }
+    }
+}
+
+function restart(){
+    gameRunning = false;
+    a = new Array(21).fill().map(() => new Array(10).fill(0));
+    a.push(new Array(10).fill(9));
+    consile.log(a);
+    fallingPiece = [];
+    display();
+    dropRandom();
+    display();
+    update();
+}
