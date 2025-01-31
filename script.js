@@ -5,6 +5,8 @@ const right = document.getElementById("right");
 const r_counter = document.getElementById("r_counter");
 const r_clockwise = document.getElementById("r_clockwise");
 const down = document.getElementById("down");
+const mask = document.getElementById("mask");
+const restartBtn = document.getElementById("restart");
 
 let a = new Array(21).fill().map(() => new Array(10).fill(0));
 a.push(new Array(10).fill(9));
@@ -699,9 +701,6 @@ function checkRow(arr,i){
         if(arr[i][j]==0){
             return false;
         }
-        // if(arrayIncludes(fallingPiece,[i,j])){
-        //     return false;
-        // }
     }
     return true;
 }
@@ -748,21 +747,29 @@ down.addEventListener("click",() => {
 
 function checkGameOver(){
     for(let i=0;i<10;i++){
-        if(a[0][i]!=0){
+        if(a[1][i]!=0){
             console.log("over");
+            mask.classList.add("active");
+            gameRunning = false;
             return true;
         }
     }
 }
 
 function restart(){
-    gameRunning = false;
+    gameRunning = true;
+    a=[];
     a = new Array(21).fill().map(() => new Array(10).fill(0));
     a.push(new Array(10).fill(9));
-    consile.log(a);
+    console.log(a);
     fallingPiece = [];
     display();
     dropRandom();
     display();
     update();
 }
+
+restartBtn.addEventListener("click",() => {
+    mask.classList.remove("active");
+    restart();
+})

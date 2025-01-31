@@ -17,8 +17,33 @@ body{
     margin: 10px;
     font-family: "monospace";
     font-size: 30px;
+    width: 72px;
 }
 .spaceHolder{
     width: 100px;
     height: 60px;
+}
+
+.mask{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: aqua;
+    opacity: 0.8;
+    align-items: center;
+    justify-content: center;
+}
+
+.mask.active{
+    display: flex;
+}
+
+#restart{
+    margin: 10px;
+    font-family: "monospace";
+    font-size: 30px;
+    opacity: 1.25;
 }
