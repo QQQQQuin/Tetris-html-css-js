@@ -7,6 +7,7 @@ const r_clockwise = document.getElementById("r_clockwise");
 const down = document.getElementById("down");
 const mask = document.getElementById("mask");
 const restartBtn = document.getElementById("restart");
+const scoreDiv = document.getElementById("score");
 
 let a = new Array(21).fill().map(() => new Array(10).fill(0));
 a.push(new Array(10).fill(9));
@@ -21,6 +22,8 @@ console.log(a);
 // save the falling one to an array?
 let fallingPiece = [];
 let interval = 750;
+let updateCounter = 0;
+let score = 0;
 
 let gameRunning = true;
 
@@ -187,6 +190,10 @@ function fall(){
 
 function update(){
     // console.log("update");
+    updateCounter++;
+    if(updateCounter%40==0){
+        interval=(interval<=200)?200:interval-25;
+    }
     if(gameRunning == true){
         if(!checkCanFall()){
             clearRow();
@@ -708,6 +715,7 @@ function checkRow(arr,i){
 function clearRow(){
     for (let i=0;i<21;i++){
         if(checkRow(a,i)){
+            score+=10;
             for (let j=0;j<10;j++){
                 a[i][j]=0;
             }
@@ -716,6 +724,7 @@ function clearRow(){
                     a[x][y]=a[x-1][y];
                 }
             }
+            displayScore();
         }
     }
 }
@@ -759,6 +768,8 @@ function checkGameOver(){
 function restart(){
     gameRunning = true;
     a=[];
+    updateCounter=0;
+    interval=750;
     a = new Array(21).fill().map(() => new Array(10).fill(0));
     a.push(new Array(10).fill(9));
     console.log(a);
@@ -773,3 +784,7 @@ restartBtn.addEventListener("click",() => {
     mask.classList.remove("active");
     restart();
 })
+
+function displayScore(){
+    scoreDiv.innerHTML=`SCORE ${score}`;
+}
